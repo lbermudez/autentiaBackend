@@ -1,4 +1,4 @@
-package com.autentia.prueba.mappers;
+package com.autentia.coursesapp.mappers;
 
 import java.util.List;
 
@@ -8,12 +8,12 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
-import com.autentia.prueba.model.Course;
-import com.autentia.prueba.model.Teacher;
+import com.autentia.coursesapp.model.Course;
+import com.autentia.coursesapp.model.Teacher;
 
 public interface CourseMapper {
 
-	@Select("select c.title,c.hours,c.teacherId,c.active,c.level from courses c where c.active = #{active}")
+	@Select("select c.title,c.hours,c.teacherId,c.active,c.level from courses c where c.active = #{active} order by c.title ${sort}")
 	@Results(value = {
 	        @Result(property = "title", column = "title"),
 	        @Result(property = "hours", column = "hours"),
@@ -21,7 +21,7 @@ public interface CourseMapper {
 	        @Result(property = "active", column = "active"),
 	        @Result(property = "level", column = "level")
 	})
-	public List<Course> courses(@Param("active") Boolean active);
+	public List<Course> coursesByActiveAndSort(@Param("active") Boolean active, @Param("sort") String sort);
 	
 	@Select("select t.name,t.lastName1,t.lastName2 from teachers t where t.id = #{teacherId}")
 	public Teacher getTeacher(Integer teacherId);	

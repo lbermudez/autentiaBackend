@@ -1,4 +1,4 @@
-package com.autentia.prueba.model;
+package com.autentia.coursesapp.model;
 
 import java.io.Serializable;
 

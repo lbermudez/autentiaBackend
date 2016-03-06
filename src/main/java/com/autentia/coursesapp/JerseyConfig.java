@@ -1,17 +1,17 @@
-package com.autentia.prueba;
+package com.autentia.coursesapp;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
-import com.autentia.prueba.restservices.Courses;
-import com.autentia.prueba.restservices.ReverseEndpoint;
+import com.autentia.coursesapp.restservices.Courses;
+import com.autentia.coursesapp.restservices.Teachers;
 
 @Component
 public class JerseyConfig extends ResourceConfig {
 
 	public JerseyConfig() {
 		register(Courses.class);
-		register(ReverseEndpoint.class);
+		register(Teachers.class);
 	}
 
 }

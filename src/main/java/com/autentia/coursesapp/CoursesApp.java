@@ -1,4 +1,4 @@
-package com.autentia.prueba;
+package com.autentia.coursesapp;
 
 import javax.sql.DataSource;
 
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @SpringBootApplication
-@MapperScan("com.autentia.prueba.mappers")
+@MapperScan("com.autentia.coursesapp.mappers")
 public class CoursesApp extends SpringBootServletInitializer {
 
 	@Override
