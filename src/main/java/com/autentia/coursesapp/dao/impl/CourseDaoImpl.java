@@ -20,4 +20,9 @@ public class CourseDaoImpl implements CourseDao {
 		return courseMapper.coursesByActiveAndSort(active, sort);
 	}
 
+	@Override
+	public void insertCourse(Course course) {
+		courseMapper.insertCourse(course);		
+	}
+
 }

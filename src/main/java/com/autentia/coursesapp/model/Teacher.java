@@ -8,6 +8,22 @@ public class Teacher implements Serializable {
 	private String lastName1;
 	private String lastName2;
 	
+	public Teacher() {
+		super();		
+	}
+
+	public Teacher(Integer id, String name, String lastName1, String lastName2) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.lastName1 = lastName1;
+		this.lastName2 = lastName2;
+	}
+
+	public static Teacher getInstance(Integer teacherId) {
+		return new Teacher(teacherId, null, null, null);
+	}
+
 	public Integer getId() {
 		return id;
 	}

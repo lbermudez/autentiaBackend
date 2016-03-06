@@ -8,6 +8,23 @@ public class Course implements Serializable {
 	private Teacher teacher;
 	private Boolean active;
 	private Level level;
+	
+	public Course() {
+		super();
+	}
+
+	public Course(String title, Integer hours, Teacher teacher, Level level, Boolean active) {
+		super();
+		this.title = title;
+		this.hours = hours;
+		this.teacher = teacher;
+		this.active = active;
+		this.level = level;
+	}
+	
+	public static Course getInstance(String title, Integer hours, Integer teacherId, String level, Boolean active) {		
+		return new Course(title, hours, Teacher.getInstance(teacherId), Level.valueOf(level), active);
+	}
 
 	public String getTitle() {
 		return title;
@@ -47,5 +64,5 @@ public class Course implements Serializable {
 
 	public void setLevel(Level level) {
 		this.level = level;
-	}
+	}	
 }

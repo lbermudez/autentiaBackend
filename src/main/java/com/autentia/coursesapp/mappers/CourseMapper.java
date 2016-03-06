@@ -2,6 +2,7 @@ package com.autentia.coursesapp.mappers;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
@@ -24,5 +25,8 @@ public interface CourseMapper {
 	public List<Course> coursesByActiveAndSort(@Param("active") Boolean active, @Param("sort") String sort);
 	
 	@Select("select t.name,t.lastName1,t.lastName2 from teachers t where t.id = #{teacherId}")
-	public Teacher getTeacher(Integer teacherId);	
+	public Teacher getTeacher(Integer teacherId);
+
+	@Insert("insert into courses(title,hours,teacherId,active,level) values(#{title}, #{hours}, #{teacherId}, #{active}, #{level})")
+	public void insertCourse(Course course);	
 }
