@@ -12,6 +12,11 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import com.autentia.coursesapp.dao.CourseDao;
+import com.autentia.coursesapp.dao.TeacherDao;
+import com.autentia.coursesapp.dao.impl.CourseDaoImpl;
+import com.autentia.coursesapp.dao.impl.TeacherDaoImpl;
+
 @SpringBootApplication
 @MapperScan("com.autentia.coursesapp.mappers")
 public class CoursesApp extends SpringBootServletInitializer {
@@ -41,6 +46,16 @@ public class CoursesApp extends SpringBootServletInitializer {
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(getDataSource());
 		return sessionFactory.getObject();
+	}
+	
+	@Bean
+	public TeacherDao teacherDao() {
+		return new TeacherDaoImpl();
+	}
+	
+	@Bean
+	public CourseDao courseDao() {
+		return new CourseDaoImpl();
 	}
 
 	public static void main(String[] args) {

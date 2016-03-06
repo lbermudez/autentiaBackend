@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.autentia.coursesapp.dao.impl.TeacherDaoImpl;
+import com.autentia.coursesapp.dao.TeacherDao;
 import com.autentia.coursesapp.model.Teacher;
 
 @Component
@@ -22,7 +22,7 @@ public class Teachers {
 	private static final Logger log = LoggerFactory.getLogger(Teachers.class);
 	
 	@Autowired	
-	private TeacherDaoImpl teacherDao;
+	private TeacherDao teacherDao;
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })	

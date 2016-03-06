@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.autentia.coursesapp.dao.impl.CourseDaoImpl;
+import com.autentia.coursesapp.dao.CourseDao;
 import com.autentia.coursesapp.model.Course;
 
 @Component
@@ -27,7 +27,7 @@ public class Courses {
 	private static final Logger log = LoggerFactory.getLogger(Courses.class);
 
 	@Autowired
-	private CourseDaoImpl courseDao;
+	private CourseDao courseDao;
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -43,10 +43,10 @@ public class Courses {
 	}
 
 	@POST
-	@Consumes({ MediaType.APPLICATION_JSON })
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Transactional
-	public Response createCourse(@FormParam("title") String title,
+	public Response createCourseFromForm(@FormParam("title") String title,
 								 @FormParam("hours") Integer hours,
 								 @FormParam("teacherId") Integer teacherId,
 								 @FormParam("level") String level,
@@ -54,6 +54,16 @@ public class Courses {
 
 		log.debug("Creating course");
 		courseDao.insertCourse(Course.getInstance(title, hours, teacherId, level, active));
-		return Response.status(201).entity("Course create success").build();
+		return Response.status(200).entity("Course create success").build();
+	}
+	
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Transactional
+	public Response createCourse(Course course) {
+		log.debug("Creating course");
+		courseDao.insertCourse(course);
+		return Response.status(200).entity("Course create success").build();
 	}
 }

@@ -27,6 +27,6 @@ public interface CourseMapper {
 	@Select("select t.name,t.lastName1,t.lastName2 from teachers t where t.id = #{teacherId}")
 	public Teacher getTeacher(Integer teacherId);
 
-	@Insert("insert into courses(title,hours,teacherId,active,level) values(#{title}, #{hours}, #{teacherId}, #{active}, #{level})")
+	@Insert("insert into courses(title,hours,teacherId,active,level) values(#{title}, #{hours}, #{teacher.id}, #{active}, #{level})")
 	public void insertCourse(Course course);	
 }
