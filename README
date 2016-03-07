@@ -1,4 +1,12 @@
-Comandos Maven - springboot
+COMANDOS MAVEN - SPRING BOOT
+	Para arrancar la aplicacion -> mvn spring-boot:run
+	Para pasar test de integracion -> mvn integration-test
 
-Para arrancar la aplicacion -> mvn spring-boot:run
-Para pasar test de integracion -> mvn integration-test  
+TESTS
+	1. El test createCourseWithNotExistsTeacher falla porque al insertar un curso con un profesor inexistente
+	el servicio debería devolver un error 400 (BAD_REQUEST) pero no está ocurriendo porque la base de datos H2 no está lanzando 
+	una excepción por Foreing Key Constraint.
+
+TODOs:
+	1. Debería implemetar un validador de formato de parámetros para los servicios rest. No sé si JAX-RS tiene algún mecanismo
+	por anotación.  
