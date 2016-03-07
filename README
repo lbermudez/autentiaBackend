@@ -3,7 +3,7 @@ COMANDOS MAVEN - SPRING BOOT
 	- Para pasar test de integracion -> mvn integration-test
 
 TESTS DE INTEGRACIÓN
-	- Son test de integracion para probar los servicios rest, daos y mappers en cada llamada.
+	- Son test de integración para probar los servicios rest, daos y mappers en cada llamada.
 	- En el arranque de los tests se carga una base de datos en memoria; H2.  
 	- El test createCourseWithNotExistsTeacher falla porque al insertar un curso con un profesor inexistente
 	  el servicio debería devolver un error 400 (BAD_REQUEST) pero no está ocurriendo porque la base de datos H2 no está lanzando 

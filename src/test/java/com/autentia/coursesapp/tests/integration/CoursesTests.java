@@ -35,9 +35,7 @@ public class CoursesTests {
 
 	@Value("${local.server.port}")
 	private Integer port;
-
 	private static final Logger log = LoggerFactory.getLogger(CoursesTests.class);
-
 	private RestTemplate restTemplate = new TestRestTemplate();
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 
