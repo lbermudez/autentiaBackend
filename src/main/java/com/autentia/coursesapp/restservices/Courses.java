@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.autentia.coursesapp.dao.CourseDao;
 import com.autentia.coursesapp.model.Course;
 
+// TODO: Habria que meter validadores de para los parametros.
 @Component
 @Path("/courses")
 public class Courses {
@@ -44,7 +45,7 @@ public class Courses {
 			courses = courseDao.findCoursesByActiveAndSort(active, sort);
 			return Response.status(200).entity(courses).build();
 		} catch(Exception e) {
-				return Response.status(400).entity("error").build();
+				return Response.status(400).entity("Error").build();
 		}		
 	}
 	
@@ -62,7 +63,7 @@ public class Courses {
 		log.debug("Creating course");
 		try {
 			courseDao.insertCourse(Course.getInstance(title, hours, teacherId, level, active));
-			return Response.status(200).entity("Course create success").build();
+			return Response.status(200).entity("Course created successfully").build();
 		} catch(Exception e) {
 			return Response.status(400).entity("error").build();
 		}
@@ -78,7 +79,7 @@ public class Courses {
 		log.debug("Creating course");
 		try {
 			courseDao.insertCourse(course);
-			return Response.status(200).entity("Course create success").build();
+			return Response.status(200).entity("Course created successfully").build();
 		} catch(Exception e) {
 			return Response.status(400).entity("error").build();
 		}

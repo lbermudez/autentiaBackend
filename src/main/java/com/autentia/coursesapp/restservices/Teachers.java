@@ -28,11 +28,11 @@ public class Teachers {
 	@Produces({ MediaType.APPLICATION_JSON })	
 	public Response getTeachers() {
 		log.debug("Retrieving teachers");
-		List<Teacher> teachers = teacherDao.teachers();
-		if (teachers != null) {
+		try {
+			List<Teacher> teachers = teacherDao.teachers();
 			return Response.status(200).entity(teachers).build();
-		} else {
-			return Response.status(400).entity("error").build();
+		} catch(Exception e) {
+			return Response.status(400).entity("Error").build();
 		}		
 	}
 }
