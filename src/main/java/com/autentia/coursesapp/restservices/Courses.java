@@ -45,7 +45,7 @@ public class Courses {
 			courses = courseDao.findCoursesByActiveAndSort(active, sort);
 			return Response.status(200).entity(courses).build();
 		} catch(Exception e) {
-				return Response.status(400).entity("Error").build();
+				return Response.status(500).entity("Error").build();
 		}		
 	}
 	
@@ -65,7 +65,7 @@ public class Courses {
 			courseDao.insertCourse(Course.getInstance(title, hours, teacherId, level, active));
 			return Response.status(200).entity("Course created successfully").build();
 		} catch(Exception e) {
-			return Response.status(400).entity("error").build();
+			return Response.status(500).entity("Error").build();
 		}
 	}
 	

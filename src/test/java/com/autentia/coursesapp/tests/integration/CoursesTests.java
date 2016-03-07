@@ -63,7 +63,7 @@ public class CoursesTests {
 	public void getCoursesWithWrongSortParam() throws JsonParseException, JsonMappingException, IOException {
 		String pathParams = "/courses/".concat(Courses.ACTIVES.toString()).concat("/").concat("ascc");
 		ResponseEntity<String> response = restTemplate.getForEntity(getBaseUrl().concat(pathParams), String.class);
-		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 	}
 
 	@Test

@@ -32,7 +32,7 @@ public class Teachers {
 			List<Teacher> teachers = teacherDao.teachers();
 			return Response.status(200).entity(teachers).build();
 		} catch(Exception e) {
-			return Response.status(400).entity("Error").build();
+			return Response.status(500).entity("Error").build();
 		}		
 	}
 }
