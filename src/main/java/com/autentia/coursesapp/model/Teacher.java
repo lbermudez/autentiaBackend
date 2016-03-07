@@ -22,6 +22,11 @@ public class Teacher implements Serializable {
 
 	public static Teacher getInstance(Integer teacherId) {
 		return new Teacher(teacherId, null, null, null);
+	}	
+
+	@Override
+	public String toString() {
+		return "Teacher [id=" + id + ", name=" + name + ", lastName1=" + lastName1 + ", lastName2=" + lastName2 + "]";
 	}
 
 	public Integer getId() {

@@ -19,7 +19,7 @@ import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
-import com.autentia.coursesapp.CoursesApp;
+import com.autentia.coursesapp.CoursesAppConfig;
 import com.autentia.coursesapp.dao.CourseDao;
 import com.autentia.coursesapp.dao.TeacherDao;
 import com.autentia.coursesapp.dao.impl.CourseDaoImpl;
@@ -27,7 +27,7 @@ import com.autentia.coursesapp.dao.impl.TeacherDaoImpl;
 
 @SpringBootApplication
 @ComponentScan(
-	    excludeFilters = @Filter(type=FilterType.ASSIGNABLE_TYPE, value={CoursesApp.class}), 
+	    excludeFilters = @Filter(type=FilterType.ASSIGNABLE_TYPE, value={CoursesAppConfig.class}), 
 	    basePackages = { 
 	      "com.autentia.coursesapp"
 	    }
@@ -45,7 +45,7 @@ public class CoursesAppConfigTest extends SpringBootServletInitializer {
         DataSource dataSource = createDataSource();
         DatabasePopulatorUtils.execute(createDatabasePopulator(), dataSource);
         return dataSource;
-    }
+    }	
 
     private DatabasePopulator createDatabasePopulator() {
         ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();

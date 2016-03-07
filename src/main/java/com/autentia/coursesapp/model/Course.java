@@ -25,6 +25,12 @@ public class Course implements Serializable {
 	public static Course getInstance(String title, Integer hours, Integer teacherId, String level, Boolean active) {		
 		return new Course(title, hours, Teacher.getInstance(teacherId), Level.valueOf(level), active);
 	}
+	
+	@Override
+	public String toString() {
+		return "Course [title=" + title + ", hours=" + hours + ", teacher=" + teacher + ", active=" + active
+				+ ", level=" + level + "]";
+	}
 
 	public String getTitle() {
 		return title;

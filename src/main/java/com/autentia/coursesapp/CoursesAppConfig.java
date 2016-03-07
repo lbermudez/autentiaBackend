@@ -19,11 +19,11 @@ import com.autentia.coursesapp.dao.impl.TeacherDaoImpl;
 
 @SpringBootApplication
 @MapperScan("com.autentia.coursesapp.mappers")
-public class CoursesApp extends SpringBootServletInitializer {
+public class CoursesAppConfig extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(CoursesApp.class);
+		return application.sources(CoursesAppConfig.class);
 	}
 
 	@Bean
@@ -59,7 +59,7 @@ public class CoursesApp extends SpringBootServletInitializer {
 	}
 
 	public static void main(String[] args) {
-		new CoursesApp().configure(new SpringApplicationBuilder(CoursesApp.class)).run(args);
+		new CoursesAppConfig().configure(new SpringApplicationBuilder(CoursesAppConfig.class)).run(args);
 	}
 
 }
