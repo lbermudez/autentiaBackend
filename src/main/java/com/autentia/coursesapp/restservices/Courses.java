@@ -76,7 +76,7 @@ public class Courses {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Transactional
 	public Response createCourse(Course course) {
-		log.debug("Creating course");
+		log.info("Creating course");
 		try {
 			courseDao.insertCourse(course);
 			return Response.status(200).entity("Course created successfully").build();
