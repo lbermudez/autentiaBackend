@@ -10,7 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.init.DatabasePopulator;
+import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 import com.autentia.coursesapp.dao.CourseDao;
 import com.autentia.coursesapp.dao.TeacherDao;
@@ -28,13 +32,26 @@ public class CoursesAppConfig extends SpringBootServletInitializer {
 
 	@Bean
 	public DataSource getDataSource() {		
-		BasicDataSource dataSource = new BasicDataSource();
+		DataSource dataSource = createDataSource();
+        DatabasePopulatorUtils.execute(createDatabasePopulator(), dataSource);
+        return dataSource;
+	}
+	
+	private DatabasePopulator createDatabasePopulator() {
+        ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
+        databasePopulator.setContinueOnError(true);
+        databasePopulator.addScript(new ClassPathResource("schema.sql"));
+        return databasePopulator;
+    }
+
+    private BasicDataSource createDataSource() {
+    	BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/courses");
 		dataSource.setUsername("root");
 		dataSource.setPassword("sisuka12");
-		return dataSource;
-	}
+		return dataSource;     
+    }
 
 	@Bean
 	public DataSourceTransactionManager transactionManager() {

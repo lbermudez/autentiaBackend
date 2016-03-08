@@ -1,3 +1,6 @@
+CREATE DATABASE  IF NOT EXISTS `courses` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `courses`;
+
 DROP TABLE IF EXISTS `courses`;
 DROP TABLE IF EXISTS `teachers`;
 
@@ -20,3 +23,9 @@ CREATE TABLE `courses` (
   KEY `teacherId_FK_idx` (`teacherId`),
   CONSTRAINT `teacher` FOREIGN KEY (`teacherId`) REFERENCES `teachers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+INSERT INTO `teachers` VALUES (1,'Luis','Bermudez','Rodriguez');
+
+INSERT INTO `courses` VALUES (1,'Angular2',25,1,1,'AVANZADO'),
+							 (2,'JAVA 8',50,1,1,'AVANZADO'),
+							 (3,'JAVA 8',50,1,1,'AVANZADO');

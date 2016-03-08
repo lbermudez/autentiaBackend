@@ -9,9 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -19,19 +16,12 @@ import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
-import com.autentia.coursesapp.CoursesAppConfig;
 import com.autentia.coursesapp.dao.CourseDao;
 import com.autentia.coursesapp.dao.TeacherDao;
 import com.autentia.coursesapp.dao.impl.CourseDaoImpl;
 import com.autentia.coursesapp.dao.impl.TeacherDaoImpl;
 
 @SpringBootApplication
-@ComponentScan(
-	    excludeFilters = @Filter(type=FilterType.ASSIGNABLE_TYPE, value={CoursesAppConfig.class}), 
-	    basePackages = { 
-	      "com.autentia.coursesapp"
-	    }
-	)
 @MapperScan("com.autentia.coursesapp.mappers")
 public class CoursesAppConfigTest extends SpringBootServletInitializer {
 
