@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.autentia.coursesapp.dao.CourseDao;
 import com.autentia.coursesapp.model.Course;
 
-// TODO: Habria que meter validadores de para los parametros.
+// TODO: Habria que meter validadores para los parametros.
 @Component
 @Path("/courses")
 public class Courses {

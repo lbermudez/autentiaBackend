@@ -18,18 +18,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
+import com.autentia.coursesapp.CoursesAppConfig;
 import com.autentia.coursesapp.model.Course;
 import com.autentia.coursesapp.model.Level;
 import com.autentia.coursesapp.model.Teacher;
 import com.autentia.coursesapp.restservices.Courses;
-import com.autentia.coursesapp.tests.integration.config.CoursesAppConfigTest;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = CoursesAppConfigTest.class)
+@SpringApplicationConfiguration(classes = CoursesAppConfig.class)
 @WebIntegrationTest(randomPort = true)
 public class CoursesTests {
 
@@ -68,8 +68,14 @@ public class CoursesTests {
 
 	@Test
 	public void createCourseWithNotExistsTeacher() throws JsonParseException, JsonMappingException, IOException {
-		ResponseEntity<String> response = createCourse("NodeJs", 70, Teacher.getInstance(2), Level.AVANZADO, true);
+		ResponseEntity<String> response = createCourse("NodeJs", 70, Teacher.getInstance(3), Level.AVANZADO, true);
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+	}
+	
+	@Test
+	public void getTeachers() {
+		ResponseEntity<String> response = restTemplate.getForEntity(getBaseUrl().concat("/teachers/"), String.class);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 
 	private List<Course> getCourses(Boolean active, String sort)

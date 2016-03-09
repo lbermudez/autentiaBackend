@@ -1,7 +1,8 @@
 # autentiaBackend
 
 COMANDOS MAVEN - SPRING BOOT
-	- Para arrancar la aplicacion -> mvn spring-boot:run
+	- Para arrancar la aplicacion -> mvn spring-boot:run -Drun.arguments="dev"
+	  Paso el parametro dev para cargar el datasource para mysql y para crear y cargar datos en la base de datos.
 	- Para pasar test de integracion -> mvn integration-test
 
 TESTS DE INTEGRACIÓN
