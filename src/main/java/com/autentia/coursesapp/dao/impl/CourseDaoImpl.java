@@ -25,4 +25,9 @@ public class CourseDaoImpl implements CourseDao {
 		courseMapper.insertCourse(course);		
 	}
 
+	@Override
+	public List<Course> findCoursesByActiveAndSortAndPage(Boolean active, String sort, Integer offset, Integer count) {
+		return courseMapper.coursesByActiveAndSortAndPage(active, sort, offset, count);
+	}
+
 }

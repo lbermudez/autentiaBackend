@@ -77,6 +77,14 @@ public class CoursesTests {
 		ResponseEntity<String> response = restTemplate.getForEntity(getBaseUrl().concat("/teachers/"), String.class);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
+	
+	@Test
+	public void getCoursesByPage() throws JsonParseException, JsonMappingException, IOException {
+		String pathParams = "/courses/".concat(Courses.ACTIVES.toString()).concat("/").concat(Courses.ASC_SORT).concat("/1/3");
+		ResponseEntity<String> response = restTemplate.getForEntity(getBaseUrl().concat(pathParams), String.class);
+		List<Course> courses = MAPPER.readValue(response.getBody(), new TypeReference<List<Course>>() {});
+		assertEquals(3, courses.size());
+	}
 
 	private List<Course> getCourses(Boolean active, String sort)
 			throws IOException, JsonParseException, JsonMappingException {

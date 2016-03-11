@@ -49,6 +49,22 @@ public class Courses {
 		}		
 	}
 	
+	@GET @Path("/{active}/{sort}/{offset}/{count}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response getCoursesByPage(@PathParam("active") Boolean active,
+							   @PathParam("sort") String sort,
+							   @PathParam("offset") Integer offset,
+							   @PathParam("count") Integer count) {		
+		List<Course> courses;
+		log.debug("Retrieving courses");
+		try {
+			courses = courseDao.findCoursesByActiveAndSortAndPage(active, sort, offset, count);
+			return Response.status(200).entity(courses).build();
+		} catch(Exception e) {
+				return Response.status(500).entity("Error").build();
+		}		
+	}
+	
 	
 
 	@POST
