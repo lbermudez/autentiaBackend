@@ -13,7 +13,7 @@ TESTS DE INTEGRACIÓN
 	
 PROBLEMAS
 
-	- He tenido problemas con la carga del contexto de spring. Tengo un contexo para la aplicación, con creación 
+	- He tenido problemas con la carga del contexto de spring. Tengo un contexto para la aplicación, con creación 
 	  y carga de base de datos en MySql, y tenia otro para los test, con creacion y carga de base de datos en
 	  Memoria H2, pero al arrancar los test me cogía las dos contextos, a pesar de poner 'exclude' de 
 	  varias maneras, con lo cual se daban multitud de problemas. Para solucionarlo he tenido que dejar solo el 

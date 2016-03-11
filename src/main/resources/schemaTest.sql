@@ -23,7 +23,3 @@ CREATE TABLE `courses` (
 
 INSERT INTO `teachers` VALUES (1,'Luis','Bermudez','Rodriguez'),
 							  (2,'Roberto','Canales','Mora');
-
-INSERT INTO `courses` VALUES (1,'Angular2',25,1,'AVANZADO',1),
-							 (2,'JAVA 8',50,2,'AVANZADO',1),
-							 (3,'Spring Boot',50,1,'AVANZADO',1);

@@ -39,31 +39,45 @@ public class CoursesTests {
 	private RestTemplate restTemplate = new TestRestTemplate();
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
+	
 	@Test
-	public void countCoursesActives() {
-		ResponseEntity<String> response = restTemplate.getForEntity(getBaseUrl().concat("courses/count/").concat(Courses.ACTIVES.toString()), String.class);
-		assertEquals(HttpStatus.OK, response.getStatusCode());
+	public void createCourse() throws JsonParseException, JsonMappingException, IOException {
+		String title = "JEE";
+		ResponseEntity<String> response = createCourse(title, 50, Teacher.getInstance(1), Level.AVANZADO, Courses.ACTIVES);
+		
+		assertEquals(HttpStatus.OK, response.getStatusCode());		
 	}
 
 	@Test
-	public void createCourse() {
-		ResponseEntity<String> response = createCourse("JEE", 50, Teacher.getInstance(1), Level.AVANZADO, true);
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-	}
-
-	@Test
-	public void createAndCheckOneMore() throws JsonParseException, JsonMappingException, IOException {
+	public void countCoursesActives() throws JsonParseException, JsonMappingException, IOException {
+		createCourse("JAVA", 50, Teacher.getInstance(1), Level.AVANZADO, Courses.ACTIVES);
+		createCourse("TDD", 50, Teacher.getInstance(1), Level.AVANZADO, Courses.ACTIVES);
+		
 		List<Course> currentCourses = getCourses(Courses.ACTIVES, Courses.ASC_SORT);
-		int size1 = currentCourses.size();
-		log.debug("Courses.size: " + size1);
-
-		createCourse("JAVA 8", 50, Teacher.getInstance(1), Level.AVANZADO, true);
-		currentCourses = getCourses(Courses.ACTIVES, Courses.ASC_SORT);
-		int size2 = currentCourses.size();
-		log.debug("Courses.size: " + size2);
-
-		assertEquals(size1 + 1, size2);
+		ResponseEntity<String> response = restTemplate
+				.getForEntity(getBaseUrl().concat("courses/count/").concat(Courses.ACTIVES.toString()), String.class);
+		
+		int count = Integer.parseInt(response.getBody());
+		int size = currentCourses.size();
+		
+		assertEquals(size, count);
 	}
+	
+	@Test
+	public void getCoursesByPage() throws JsonParseException, JsonMappingException, IOException {
+		createCourse("COBOL", 50, Teacher.getInstance(1), Level.AVANZADO, Courses.ACTIVES);
+		createCourse("C++", 50, Teacher.getInstance(1), Level.AVANZADO, Courses.ACTIVES);
+		createCourse("TypeScript", 50, Teacher.getInstance(1), Level.AVANZADO, Courses.ACTIVES);
+		createCourse("Angular2", 50, Teacher.getInstance(1), Level.AVANZADO, Courses.ACTIVES);
+		
+		String pathParams = "/courses/".concat(Courses.ACTIVES.toString()).concat("/").concat(Courses.ASC_SORT)
+				.concat("/1/3");
+		ResponseEntity<String> response = restTemplate.getForEntity(getBaseUrl().concat(pathParams), String.class);
+		List<Course> courses = MAPPER.readValue(response.getBody(),
+				new TypeReference<List<Course>>() {});
+		assertEquals(3, courses.size());
+	}
+	
 
 	@Test
 	public void getCoursesWithWrongSortParam() throws JsonParseException, JsonMappingException, IOException {
@@ -74,29 +88,22 @@ public class CoursesTests {
 
 	@Test
 	public void createCourseWithNotExistsTeacher() throws JsonParseException, JsonMappingException, IOException {
-		ResponseEntity<String> response = createCourse("NodeJs", 70, Teacher.getInstance(3), Level.AVANZADO, true);
+		ResponseEntity<String> response = createCourse("NodeJs", 70, Teacher.getInstance(3), Level.AVANZADO, Courses.ACTIVES);
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
 	}
-	
+
 	@Test
 	public void getTeachers() {
 		ResponseEntity<String> response = restTemplate.getForEntity(getBaseUrl().concat("/teachers/"), String.class);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
-	}
-	
-	@Test
-	public void getCoursesByPage() throws JsonParseException, JsonMappingException, IOException {
-		String pathParams = "/courses/".concat(Courses.ACTIVES.toString()).concat("/").concat(Courses.ASC_SORT).concat("/1/3");
-		ResponseEntity<String> response = restTemplate.getForEntity(getBaseUrl().concat(pathParams), String.class);
-		List<Course> courses = MAPPER.readValue(response.getBody(), new TypeReference<List<Course>>() {});
-		assertEquals(3, courses.size());
 	}
 
 	private List<Course> getCourses(Boolean active, String sort)
 			throws IOException, JsonParseException, JsonMappingException {
 		String pathParams = "/courses/".concat(active.toString()).concat("/").concat(sort);
 		ResponseEntity<String> response = restTemplate.getForEntity(getBaseUrl().concat(pathParams), String.class);
-		List<Course> currentCourses = MAPPER.readValue(response.getBody(), new TypeReference<List<Course>>() {});
+		List<Course> currentCourses = MAPPER.readValue(response.getBody(),
+				new TypeReference<List<Course>>() {});
 		return currentCourses;
 	}
 
