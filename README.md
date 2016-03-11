@@ -20,10 +20,12 @@ PROBLEMAS
 	
 
 TODOs:
+
 	1. Debería implemetar un validador de formato de parámetros para los servicios rest. No sé si JAX-RS tiene algún
 	   mecanismo por anotación.  
 	
 ARQUITECTURA
+
 	1. Los servicios rest los considero servicios de tipo entity, por tanto, no he creido conveniente crear una 
 	   capa de servicios o managers entre los servicios rest y los dao. Con lo cual los servicios rest utilizan
 	   directamente los Dao.
