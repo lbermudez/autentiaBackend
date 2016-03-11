@@ -34,13 +34,25 @@ public class Courses {
 	@Autowired
 	private CourseDao courseDao;
 	
+	@GET @Path("/count/{active}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response countCourses(@PathParam("active") Boolean active) {
+		log.info("Counting actived courses");
+		try {
+			Integer count = courseDao.getCountCourses(active);
+			return Response.status(200).entity(count).build();
+		} catch(Exception e) {
+				return Response.status(500).entity("Error").build();
+		}		
+	}
+	
 
 	@GET @Path("/{active}/{sort}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response getCourses(@PathParam("active") Boolean active,
 							   @PathParam("sort") String sort) {		
 		List<Course> courses;
-		log.debug("Retrieving courses");
+		log.info("Retrieving actived courses");
 		try {
 			courses = courseDao.findCoursesByActiveAndSort(active, sort);
 			return Response.status(200).entity(courses).build();
@@ -56,7 +68,7 @@ public class Courses {
 							   @PathParam("offset") Integer offset,
 							   @PathParam("count") Integer count) {		
 		List<Course> courses;
-		log.debug("Retrieving courses");
+		log.info("Retrieving peged courses");
 		try {
 			courses = courseDao.findCoursesByActiveAndSortAndPage(active, sort, offset, count);
 			return Response.status(200).entity(courses).build();
@@ -76,7 +88,7 @@ public class Courses {
 										 @FormParam("teacherId") Integer teacherId,
 										 @FormParam("level") String level,
 										 @FormParam("active") Boolean active) {
-		log.debug("Creating course");
+		log.info("Creating course");
 		try {
 			courseDao.insertCourse(Course.getInstance(title, hours, teacherId, level, active));
 			return Response.status(200).entity("Course created successfully").build();

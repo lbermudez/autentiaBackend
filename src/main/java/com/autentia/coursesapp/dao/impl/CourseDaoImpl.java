@@ -30,4 +30,9 @@ public class CourseDaoImpl implements CourseDao {
 		return courseMapper.coursesByActiveAndSortAndPage(active, sort, offset, count);
 	}
 
+	@Override
+	public Integer getCountCourses(Boolean active) {
+		return courseMapper.countCourses(active);
+	}
+
 }

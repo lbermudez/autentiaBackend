@@ -27,7 +27,7 @@ public class Teachers {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })	
 	public Response getTeachers() {
-		log.debug("Retrieving teachers");
+		log.info("Retrieving teachers");
 		try {
 			List<Teacher> teachers = teacherDao.teachers();
 			return Response.status(200).entity(teachers).build();

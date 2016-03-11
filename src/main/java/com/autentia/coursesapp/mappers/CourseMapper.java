@@ -13,6 +13,13 @@ import com.autentia.coursesapp.model.Course;
 import com.autentia.coursesapp.model.Teacher;
 
 public interface CourseMapper {
+	
+	@Select("select count(*)"
+			+ " from courses c"
+			+ " where c.active = #{active}")
+	public Integer countCourses(@Param("active") Boolean active);
+	
+	
 
 	@Select("select c.title, c.hours, c.teacherId, c.active, c.level"
 			+ " from courses c"
@@ -26,9 +33,7 @@ public interface CourseMapper {
 	})
 	public List<Course> coursesByActiveAndSort(
 			@Param("active") Boolean active,
-			@Param("sort") String sort);
-	
-	
+			@Param("sort") String sort);	
 
 	
 	
@@ -59,5 +64,5 @@ public interface CourseMapper {
 	
 	
 	@Select("select t.name,t.lastName1,t.lastName2 from teachers t where t.id = #{teacherId}")
-	public Teacher getTeacher(Integer teacherId);
+	public Teacher getTeacher(Integer teacherId);	
 }

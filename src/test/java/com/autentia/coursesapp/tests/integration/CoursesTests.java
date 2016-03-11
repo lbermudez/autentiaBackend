@@ -38,6 +38,12 @@ public class CoursesTests {
 	private static final Logger log = LoggerFactory.getLogger(CoursesTests.class);
 	private RestTemplate restTemplate = new TestRestTemplate();
 	private static final ObjectMapper MAPPER = new ObjectMapper();
+	
+	@Test
+	public void countCoursesActives() {
+		ResponseEntity<String> response = restTemplate.getForEntity(getBaseUrl().concat("courses/count/").concat(Courses.ACTIVES.toString()), String.class);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+	}
 
 	@Test
 	public void createCourse() {
